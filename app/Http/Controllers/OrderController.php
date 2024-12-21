@@ -37,6 +37,7 @@ class OrderController extends Controller
 
     public function store(OrderRequest $request)
     {
+
         return new OrderResource(Order::create($request->validated()));
     }
 
