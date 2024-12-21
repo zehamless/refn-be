@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Order;
+use App\Models\Service;
 use App\Models\User;
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -22,5 +24,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
         Order::factory(30)->create();
+        Service::factory(30)->create();
     }
 }
