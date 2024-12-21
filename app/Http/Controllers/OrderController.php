@@ -5,12 +5,34 @@ namespace App\Http\Controllers;
 use App\Http\Requests\OrderRequest;
 use App\Http\Resources\OrderResource;
 use App\Models\Order;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return OrderResource::collection(Order::all());
+        $validated = $request->validate([
+            'perPage' => 'integer|min:1|max:100',
+            'sort' => 'string|nullable',
+            'filter' => 'string|nullable',
+        ]);
+
+        $query = Order::query();
+
+        if (!empty($validated['sort'])) {
+            $sortFields = explode(',', $validated['sort']);
+            for ($i = 0; $i < count($sortFields); $i += 2) {
+                $query->orderBy($sortFields[$i], $sortFields[$i + 1] ?? 'asc');
+            }
+        }
+
+        if (!empty($validated['filter'])) {
+            $filterFields = explode(',', $validated['filter']);
+            $query->whereStatus(last($filterFields));
+        }
+
+        $orders = $query->paginate($validated['perPage']);
+        return OrderResource::collection($orders);
     }
 
     public function store(OrderRequest $request)

@@ -21,6 +21,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => bcrypt('password'),
         ]);
-        Order::factory(10)->create();
+        Order::factory(30)->create();
     }
 }
