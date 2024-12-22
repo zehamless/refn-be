@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -12,4 +13,5 @@ Route::get('/user', function (Request $request) {
 Route::prefix('v1')->group(function () {
     Route::resource('orders', OrderController::class);
     Route::resource('services', ServiceController::class);
+    Route::resource('users', UserController::class);
 });

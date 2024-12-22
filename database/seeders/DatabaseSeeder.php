@@ -8,6 +8,8 @@ use App\Models\User;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,12 +20,26 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'password' => bcrypt('password'),
-        ]);
+        Role::create(['name' => 'admin']);
+        Role::create(['name' => 'customer']);
+        DB::transaction(function () {
+            $admin = User::factory()->create([
+                'name' => 'Test User',
+                'email' => 'test@example.com',
+                'password' => bcrypt('password'),
+            ]);
+            $admin->assignRole('admin');
+        });
+
+        User::factory()
+            ->count(10)
+            ->create()
+            ->each(function ($user) {
+                $user->assignRole('customer');
+            });
+
         Order::factory(30)->create();
         Service::factory(30)->create();
+
     }
 }
