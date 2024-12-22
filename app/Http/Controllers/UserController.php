@@ -13,7 +13,7 @@ class UserController extends Controller
         $search = $request->validate(['search' => 'string|nullable'])['search'] ?? null;
 
         $users = User::query()
-            ->role('user')
+            ->role('customer')
             ->when($search, function ($query, $search) {
                 $query->where('name', 'like', "%$search%")
                     ->orWhere('address', 'like', "%$search%")
