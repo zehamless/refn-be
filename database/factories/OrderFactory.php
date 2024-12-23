@@ -26,6 +26,7 @@ class OrderFactory extends Factory
             'updated_at' => Carbon::now(),
             'user_id' => User::first(),
             'notes' => $this->faker->sentence(),
+            'paid' => $this->faker->randomFloat(2, 1, 1000),
         ];
     }
 }

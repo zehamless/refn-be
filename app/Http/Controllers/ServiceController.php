@@ -10,7 +10,7 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        return ServiceResource::collection(Service::all());
+        return ServiceResource::collection(Service::whereNot('id', 1)->get());
     }
 
     public function store(ServiceRequest $request)

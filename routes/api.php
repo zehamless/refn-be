@@ -11,7 +11,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('v1')->group(function () {
-    Route::resource('orders', OrderController::class);
+    Route::resource('orders', OrderController::class)->names('orders');
     Route::resource('services', ServiceController::class);
     Route::resource('users', UserController::class);
 });
