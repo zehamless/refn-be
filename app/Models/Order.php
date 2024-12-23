@@ -17,6 +17,7 @@ class Order extends Model
         'status',
         'order_type',
         'order_id',
+        'notes',
     ];
 
     protected function casts(): array

@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->decimal('total_amount',10, 2);
             $table->enum('status', ['not_paid', 'processing', 'completed', 'cancelled'])->default('not_paid');
             $table->enum('order_type', ['deliver', 'pickup'])->default('deliver');
+            $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
