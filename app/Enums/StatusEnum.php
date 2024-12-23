@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum StatusEnum: string
 {
-    case NOT_PAID = 'not_paid';
+    case UNPAID = 'unpaid';
     case PROCESSING = 'processing';
     case COMPLETED = 'completed';
     case DECLINED = 'cancelled';
