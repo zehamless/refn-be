@@ -21,10 +21,11 @@ class OrderFactory extends Factory
             'total_amount' => $this->faker->randomFloat(2, 1, 1000),
             'status' => StatusEnum::cases()[array_rand(StatusEnum::cases())]->value,
             'order_type' => OrderTypeEnum::cases()[array_rand(OrderTypeEnum::cases())]->value,
-            'order_id' => $this->faker->uuid(),
+            'invoice_id' => $this->faker->uuid(),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
             'user_id' => User::first(),
+            'notes' => $this->faker->sentence(),
         ];
     }
 }

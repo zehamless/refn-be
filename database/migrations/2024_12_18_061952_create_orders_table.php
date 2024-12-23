@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->uuid('order_id')->index()->primary(false);
+            $table->uuid('invoice_id')->index();
             $table->decimal('total_amount',10, 2);
             $table->enum('status', ['not_paid', 'processing', 'completed', 'cancelled'])->default('not_paid');
             $table->enum('order_type', ['deliver', 'pickup'])->default('deliver');
