@@ -11,10 +11,11 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->uuid('invoice_id')->index();
-            $table->decimal('total_amount',10, 2);
-            $table->enum('status', ['not_paid', 'processing', 'completed', 'cancelled'])->default('not_paid');
-            $table->enum('order_type', ['deliver', 'pickup'])->default('deliver');
+            $table->decimal('total_amount',12, 2);
+            $table->enum('status', ['unpaid', 'processing', 'completed', 'cancelled'])->default('unpaid');
+            $table->enum('order_type', ['delivery', 'pickup'])->default('delivery');
             $table->text('notes')->nullable();
+            $table->decimal('paid', 12, 2);
             $table->timestamps();
             $table->softDeletes();
         });

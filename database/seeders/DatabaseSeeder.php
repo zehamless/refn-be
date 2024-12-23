@@ -37,7 +37,6 @@ class DatabaseSeeder extends Seeder
             ->each(function ($user) {
                 $user->assignRole('customer');
             });
-
         Order::factory(30)->create();
         Service::factory(30)->create();
 

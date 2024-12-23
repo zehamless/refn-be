@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\OrderTypeEnum;
-use App\Enums\StatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -16,20 +14,27 @@ class Order extends Model
         'total_amount',
         'status',
         'order_type',
-        'order_id',
         'notes',
+        'paid',
+        'user_id',
     ];
 
-    protected function casts(): array
+    protected static function boot()
     {
-        return [
-            'status' => StatusEnum::class,
-            'order_type' => OrderTypeEnum::class,
-        ];
+        parent::boot();
+        self::creating(function ($model) {
+            $model->invoice_id = uuid_create(); // Ensure there's an invoice_id column in the orders table
+        });
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
+    public function order_services()
+    {
+        return $this->hasMany(OrderService::class);
+    }
+
 }
