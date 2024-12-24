@@ -26,6 +26,22 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
+        $validated = $request->validate([
+            'name' => 'required|string',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'customer' => 'boolean|required',
+        ]);
+        $user = User::create([
+            'name' => $validated['name'],
+            'phone' => $validated['phone'],
+            'address' => $validated['address'],
+            'email' => fake()->unique()->safeEmail(),
+            'password' => bcrypt(fake()->password()),
+
+        ]);
+        $user->assignRole('customer');
+        return new UserResource($user);
     }
 
     public function show($id)
