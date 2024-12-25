@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->enum('order_type', ['delivery', 'pickup'])->default('delivery');
             $table->text('notes')->nullable();
             $table->decimal('paid', 12, 2);
+            $table->date('estimated_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

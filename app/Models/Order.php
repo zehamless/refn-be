@@ -17,6 +17,7 @@ class Order extends Model
         'notes',
         'paid',
         'user_id',
+        'estimated_date',
     ];
 
     protected static function boot()

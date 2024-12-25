@@ -27,6 +27,7 @@ class OrderFactory extends Factory
             'user_id' => User::first(),
             'notes' => $this->faker->sentence(),
             'paid' => $this->faker->randomFloat(2, 1, 1000),
+            'estimated_date' => Carbon::now()->addDays(7),
         ];
     }
 }

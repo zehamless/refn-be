@@ -16,10 +16,12 @@ class OrderResource extends JsonResource
             'total_amount' => $this->total_amount,
             'status' => $this->status,
             'order_type' => $this->order_type,
-            'order_id' => $this->order_id,
+            'invoice_id' => $this->invoice_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'estimated_date' => $this->estimated_date,
             'user' => new UserResource($this->whenLoaded('user')),
+            'order_services' => OrderServiceResource::collection($this->whenLoaded('order_services')),
         ];
     }
 }

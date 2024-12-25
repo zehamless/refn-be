@@ -22,7 +22,7 @@ class OrderController extends Controller
             'filter' => 'string|nullable',
         ]);
 
-        $query = Order::query();
+        $query = Order::query()->with('user');
 
         if (!empty($validated['sort'])) {
             $sortFields = explode(',', $validated['sort']);
@@ -57,6 +57,7 @@ class OrderController extends Controller
                     'order_type' => $validated['delivery_option'],
                     'total_amount' => $total,
                     'status' => $status,
+                    'estimated_date' => $validated['estimated_date'],
                 ]);
                 $order->order_services()->createMany($items->map(function ($item) {
                     return [
@@ -78,7 +79,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        return new OrderResource($order);
+        return new OrderResource($order->load('order_services'));
     }
 
     public function update(OrderRequest $request, Order $order)
