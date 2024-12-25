@@ -21,6 +21,7 @@ class OrderResource extends JsonResource
             'updated_at' => $this->updated_at,
             'estimated_date' => $this->estimated_date,
             'paid' => $this->paid,
+            'notes' => $this->notes,
             'user' => new UserResource($this->whenLoaded('user')),
             'order_services' => OrderServiceResource::collection($this->whenLoaded('order_services')),
         ];
