@@ -79,7 +79,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        return new OrderResource($order->load('order_services'));
+        return new OrderResource($order->load(['order_services','user']));
     }
 
     public function update(OrderRequest $request, Order $order)
