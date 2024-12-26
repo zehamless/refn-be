@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\UserController;
@@ -14,4 +15,5 @@ Route::prefix('v1')->group(function () {
     Route::resource('orders', OrderController::class)->names('orders');
     Route::resource('services', ServiceController::class);
     Route::resource('users', UserController::class);
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
