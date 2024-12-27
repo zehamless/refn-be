@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Enums\StatusEnum;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 
@@ -29,5 +30,27 @@ class DashboardController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    public function getRecentOrder()
+    {
+        $orders = Order::query()
+            ->with('user')
+            ->whereDate('created_at', today())
+            ->orderByDesc('created_at')
+            ->get()->toBase();
+
+        return OrderResource::collection($orders);
+    }
+
+    public function getProcessingOrder()
+    {
+        $orders = Order::query()
+            ->with('user')
+            ->where('status', StatusEnum::PROCESSING)
+            ->orderByDesc('updated_at')
+            ->get()->toBase();
+
+        return OrderResource::collection($orders);
     }
 }

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Order;
+use App\Models\OrderService;
 use App\Models\Service;
 use App\Models\User;
 
@@ -39,6 +40,7 @@ class DatabaseSeeder extends Seeder
             });
         Order::factory(30)->create();
         Service::factory(30)->create();
+        OrderService::factory(30)->create();
 
     }
 }

@@ -16,4 +16,6 @@ Route::prefix('v1')->group(function () {
     Route::resource('services', ServiceController::class);
     Route::resource('users', UserController::class);
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('dashboard/recent-orders', [DashboardController::class, 'getRecentOrder'])->name('dashboard.recent-orders');
+    Route::get('dashboard/processing-orders', [DashboardController::class, 'getProcessingOrder'])->name('dashboard.processing-orders');
 });
